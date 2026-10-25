@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#07110d" />
+    <title>PROGRAMMING ODD | Football Analysis</title>
+    <meta
+        name="description"
+        content="Welcome to Programming Odd. Explore football match analysis, statistics, and predictions. Join our Telegram community."
+    />
+
+    <style>
+        :root {
+            --bg: #07110d;
+            --bg-soft: #0b1912;
+            --panel: #0e1e15;
+            --panel-strong: #103c25;
+            --line: #183c29;
+            --green: #37ed85;
+            --green-dark: #1c9c5c;
+            --text: #ffffff;
+            --muted: #c5d3ca;
+            --muted-2: #bdc9c1;
+            --shadow: rgba(55, 237, 133, 0.18);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        :focus-visible {
+            outline: 3px solid var(--green);
+            outline-offset: 3px;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 22px 8%;
+            background: rgba(11, 25, 18, 0.96);
+            border-bottom: 1px solid var(--line);
+            backdrop-filter: blur(5px);
+        }
+
+        .logo {
+            font-size: 23px;
+            font-weight: bold;
+            color: var(--green);
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--text);
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        nav a {
+            color: var(--text);
+            font-size: 14px;
+            transition: color 0.2s ease;
+        }
+
+        nav a:hover {
+            color: var(--green);
+        }
+
+        .hero {
+            min-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 70px 20px;
+            background:
+                radial-gradient(ellipse at top, #16472c 0%, #0b2015 38%, #07110d 75%);
+        }
+
+        .badge {
+            display: inline-block;
+            border: 1px solid var(--green);
+            color: var(--green);
+            background: rgba(55, 237, 133, 0.03);
+            padding: 7px 16px;
+            border-radius: 30px;
+            font-size: 12px;
+            letter-spacing: 2px;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-size: clamp(38px, 7vw, 72px);
+            line-height: 1.1;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 span {
+            color: var(--green);
+        }
+
+        .hero p {
+            max-width: 620px;
+            color: var(--muted);
+            font-size: 17px;
+            margin-bottom: 32px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 26px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition:
+                transform 0.25s ease,
+                background 0.25s ease,
+                color 0.25s ease,
+                border-color 0.25s ease;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--green);
+            color: #07110d;
+            box-shadow: 0 10px 30px var(--shadow);
+        }
+
+        .btn-primary:hover {
+            background: #ffffff;
+            transform: translateY(-3px);
+        }
+
+        .btn-secondary {
+            border: 1px solid var(--green);
+            color: var(--green);
+            background: transparent;
+        }
+
+        .btn-secondary:hover {
+            background: #153d27;
+            transform: translateY(-3px);
+        }
+
+        section {
+            padding: 75px 8%;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .section-title span {
+            color: var(--green);
+        }
+
+        .section-description {
+            max-width: 650px;
+            margin: 0 auto 40px;
+            color: #b9c7bf;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 22px;
+        }
+
+        .card {
+            background: var(--panel);
+            border: 1px solid #1b4930;
+            border-radius: 14px;
+            padding: 30px 22px;
+            text-align: left;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: var(--green);
+        }
+
+        .card .icon {
+            font-size: 35px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            color: var(--green);
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: var(--muted-2);
+            font-size: 14px;
+        }
+
+        .telegram-section {
+            background: linear-gradient(135deg, #103c25, #08140d);
+            border-top: 1px solid #1b4930;
+            border-bottom: 1px solid #1b4930;
+        }
+
+        .telegram-section h2 {
+            font-size: clamp(28px, 5vw, 42px);
+            margin-bottom: 18px;
+        }
+
+        .telegram-section p {
+            max-width: 600px;
+            margin: 0 auto 28px;
+            color: #d0ddd4;
+        }
+
+        .notice {
+            max-width: 800px;
+            margin: 35px auto 0;
+            color: #aabbb0;
+            font-size: 12px;
+        }
+
+        footer {
+            background: #050c08;
+            text-align: center;
+            padding: 25px 15px;
+            color: #aabbb0;
+            font-size: 13px;
+        }
+
+        footer a {
+            color: var(--green);
+            text-decoration: none;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+                padding: 20px 5%;
+            }
+
+            nav {
+                gap: 12px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            nav a {
+                margin: 0 8px;
+                font-size: 13px;
+            }
+
+            .hero {
+                min-height: 75vh;
+            }
+
+            section {
+                padding: 55px 6%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">PROGRAMMING <span>ODD</span></div>
+
+        <nav aria-label="Main navigation">
+            <a href="#home">Home</a>
+            <a href="#services">Analysis</a>
+            <a href="#telegram">Telegram</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero" id="home">
+            <div class="badge">Football • Data • Analysis</div>
+
+            <h1>
+                Welcome to<br />
+                <span>PROGRAMMING ODD</span>
+            </h1>
+
+            <p>
+                Discover football match analysis, team statistics, and data-informed
+                predictions. Join our community for updates and match discussions.
+            </p>
+
+            <div class="buttons">
+                <a
+                    class="btn btn-primary"
+                    href="https://t.me/+1apwtUPEQ8YwYmE8"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Join our Telegram community"
+                >
+                    Join Our Telegram →
+                </a>
+
+                <a class="btn btn-secondary" href="#services">
+                    Explore Our Analysis
+                </a>
+            </div>
+        </section>
+
+        <section id="services">
+            <h2 class="section-title">
+                What We <span>Offer</span>
+            </h2>
+
+            <p class="section-description">
+                Our content focuses on understanding football through research,
+                statistics, and match analysis.
+            </p>
+
+            <div class="cards">
+                <article class="card">
+                    <div class="icon" aria-hidden="true">⚽</div>
+                    <h3>Match Analysis</h3>
+                    <p>
+                        Explore team form, previous meetings, and other factors that
+                        may influence upcoming football matches.
+                    </p>
+                </article>
+
+                <article class="card">
+                    <div class="icon" aria-hidden="true">📊</div>
+                    <h3>Statistics &amp; Insights</h3>
+                    <p>
+                        Review relevant football statistics and data to better understand
+                        potential match outcomes.
+                    </p>
+                </article>
+
+                <article class="card">
+                    <div class="icon" aria-hidden="true">📲</div>
+                    <h3>Telegram Community</h3>
+                    <p>
+                        Join our Telegram channel to access published updates, analysis,
+                        and football discussions.
+                    </p>
+                </article>
+            </div>
+        </section>
+
+        <section class="telegram-section" id="telegram">
+            <h2>
+                Join the <span style="color: #37ed85;">PROGRAMMING ODD</span>
+                Community
+            </h2>
+
+            <p>
+                Stay connected with our football analysis and community updates.
+                Click below to visit our official Telegram channel.
+            </p>
+
+            <a
+                class="btn btn-primary"
+                href="https://t.me/+1apwtUPEQ8YwYmE8"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Open Programming Odd Telegram channel"
+            >
+                🚀 JOIN TELEGRAM NOW
+            </a>
+
+            <p class="notice">
+                Football predictions are uncertain, and no outcome is guaranteed.
+                If you choose to bet, do so responsibly and only where legally permitted.
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <p>© <span id="year"></span> PROGRAMMING ODD. All rights reserved.</p>
+        <p>
+            <a
+                href="https://t.me/+1apwtUPEQ8YwYmE8"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Visit our Telegram
+            </a>
+        </p>
+    </footer>
+
+    <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
